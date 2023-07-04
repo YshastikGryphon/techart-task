@@ -4,3 +4,5 @@
 * Вход в phpMyAdmin (Только чтение!) - https://phpmyadmin.alwaysdata.com/
   - 281605_take-news  - логин 
   - system7891 - пароль
+    
+* src - иначальные файлы. dist - префиксированы и сжатые
