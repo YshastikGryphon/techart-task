@@ -21,34 +21,45 @@
       </div>
     </header>
     <section class="banner" id="banner">
+      <?php
+        require_once('php/db_connect.php');
+      ?>
       <div class="banner__banner">
         <div class="container">
-          <h1 class="banner__title">
-            Возвращение этнографа
-          </h1>
-          <p class="banner__desc">
-            Сегодня с Проксимы вернулась этнографическая экспедиция Джона Голдрама.
-          </p>
+          <?php
+            $result = mysqli_query($link, "SELECT * FROM `news` ORDER BY `news`.`date` DESC LIMIT 1");
+            $row = $result->fetch_assoc();
+
+            echo('
+            <h2 class="banner__title">
+              '.$row['title'].'
+            </h2>
+            '.$row['announce'].'
+            ');
+          ?>
         </div>
         <ul class="banner__list">
-          <li class="banner__item">
-            <img class="banner__img" src="img/banner1.jpg" alt="Изображение 1"/>
-          </li>
+          <?php
+          echo ('
+            <li class="banner__item">
+              <img class="banner__img" src="img/news/'.$row['image'].'" alt="Изображение новости"/>
+            </li>
+          ');
+          ?>
           <li class="banner__item banner-animate">
-            <img class="banner__img" src="img/banner2.jpg" alt="Изображение 2"/>
+            <img class="banner__img" src="img/banner2.jpg" alt="Фоновое изображение"/>
           </li>
         </ul>
       </div>
     </section>
     <section class="news" id="news">
       <div class="container">
-        <h2 class="news__title">
+        <h1 class="news__title">
           Новости
-        </h2>
+        </h1>
         <div class="news__wrapper">
           <ul class="news__list">
             <?php
-              require_once('php/db_connect.php');
               $result = mysqli_query($link, "SELECT * FROM `news` ORDER BY `news`.`date` DESC");
               $count = 1;
               while($row = $result->fetch_assoc()) {
